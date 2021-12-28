@@ -2,17 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EarthTower : MonoBehaviour
+public class EarthTower : BasicTower
 {
-    // Start is called before the first frame update
     void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        StartCoroutine(Shoot("EarthProjectile", 1f, 3));
     }
 }

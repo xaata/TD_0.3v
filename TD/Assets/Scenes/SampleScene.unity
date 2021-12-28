@@ -1047,6 +1047,7 @@ GameObject:
   - component: {fileID: 654670482}
   - component: {fileID: 654670481}
   - component: {fileID: 654670480}
+  - component: {fileID: 654670483}
   m_Layer: 5
   m_Name: Button (1)
   m_TagString: Untagged
@@ -1117,7 +1118,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 654670481}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 146420858}
+        m_TargetAssemblyTypeName: TowerBuild, Assembly-CSharp
+        m_MethodName: ChooseTower
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 654670483}
+          m_ObjectArgumentAssemblyTypeName: TowerButton, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &654670481
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1156,6 +1169,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 654670478}
   m_CullTransparentMesh: 1
+--- !u!114 &654670483
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 654670478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d9c3443c956a5f41ab39d622656d1ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  towerPrefab: {fileID: 2173905175548856966, guid: 3c2db96e8a0cf064093ddcf4453265df, type: 3}
+  sprite: {fileID: 1270479632158244026, guid: c9edde3d5e47db248968cf5e8003419b, type: 3}
+  price: 100
+  priceTxt: {fileID: 752275002}
 --- !u!1 &752275000
 GameObject:
   m_ObjectHideFlags: 0

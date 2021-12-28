@@ -6,8 +6,8 @@ public class EnemySpawner : MonoBehaviour
 {
     private int numberOfWaves = 3;
     private int numberOfCurrentWave = 1;
-    private int numberOfStackPerWave = 5;
-    private int numberOfEnemyInStack = 3;
+    private int numberOfStackPerWave = 1;
+    private int numberOfEnemyInStack = 1;
     private int enemiesRemaining;
     [SerializeField] private GameObject[] enemyPrefab;
     [SerializeField] private Transform spawnPoint;

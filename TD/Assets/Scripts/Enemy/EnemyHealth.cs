@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
 {
-    private float enemyHealthPoint;
+    private float enemyHealthPoint = 20f;
     private float damageResistance;
 
     public float EnemyHealthPoint
