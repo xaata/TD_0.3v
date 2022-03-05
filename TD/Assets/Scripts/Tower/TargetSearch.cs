@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TargetSearch : MonoBehaviour
 {
+    protected bool _targetLocked = false;
     private List<Transform> SearchTarget(float attackRange)
     {
         List<Transform> targets = new List<Transform>();
@@ -40,7 +41,9 @@ public class TargetSearch : MonoBehaviour
     }
     public Transform WeakestTargetLock(float attackRange)
     {
+        List<Transform> targets = SearchTarget(attackRange);
         Transform target = null;
+
         return target;
     }
 
@@ -51,9 +54,13 @@ public class TargetSearch : MonoBehaviour
         if (targets.Count > 0)
         {
             target = targets[0];
+            _targetLocked = true;
             return target;
         }
         else
+        {
+            _targetLocked = false;
             return target;
+        }
     }
 }

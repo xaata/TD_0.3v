@@ -1,36 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class BasicTower : TargetSearch
+public class BasicTower : Tower
 {
-    [SerializeField] private GameObject projectilePrefab;
-
-    protected IEnumerator Shoot(string projectileName, float cooldown, float attackRange)
+    private float _cooldown = 1;
+    private float _attackRange = 4;
+    private TowerType _towerType = TowerType.BasicTower;
+    private void Start()
     {
-        while (true)
-        {
-            if (DefaultTargetLock(attackRange) != null)
-            {
-                    var projectile = GetProjectile(projectileName);
-                    projectile.CurrentTarget = DefaultTargetLock(attackRange);  
-            }
-            yield return new WaitForSeconds(cooldown);
-        }
+        StartCoroutine(Shoot(_cooldown, _attackRange));
     }
-
-    public BasicProjectile GetProjectile(string projectileName)
+    public override TowerType GetTowerType()
     {
-        switch (projectileName)
-        {
-            case "EarthProjectile":
-                return Instantiate(projectilePrefab, transform).GetComponent<EarthProjectile>();
-                break;
-            //case "Fireprojectile":
-            //    return Instantiate(projectilePrefab, transform).GetComponent<FireProjectile>();
-            //    break;
-
-        }
-        return null;
+        return _towerType;
     }
 }

@@ -1,8 +1,9 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
+using UnityEngine.Events;
 
 public class GameEvents : MonoBehaviour
 {
+    public static UnityEvent OnObjectChoose = new UnityEvent();
     //public delegate void ActionClick();
     //public static event ActionClick OnClickedEscapeAndMouse1;
     ////public static event Action OnClicked;

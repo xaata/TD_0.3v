@@ -20,8 +20,8 @@ public class TowerButton : MonoBehaviour
 
     void Start()
     {
-        priceTxt.text = price + "$";
-        towerButtonColor = GetComponent<Image>();
+      //  priceTxt.text = price + "$";
+     //   towerButtonColor = GetComponent<Image>();
     }
 
     //private void PriceCheck()

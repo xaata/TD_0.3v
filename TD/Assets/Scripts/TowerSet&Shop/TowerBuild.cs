@@ -4,36 +4,29 @@ using UnityEngine.EventSystems;
 using UnityEngine.Tilemaps;
 public class TowerBuild : MonoBehaviour
 {
-    private BasicTower choosenTower;
     private SpriteRenderer choosenTowerSprite;
     private TowerShop towerShop;
-    [SerializeField]
-    private GameObject towers;
-    [SerializeField]
-    private Tilemap tilemap;
-    private Collision2D collision;
+    public Transform towers;
+    [SerializeField] private CursorHandler _cursorHandler;
     private bool placeAvailable = true;
-
     private TowerButton clickedTowerButton { get; set; }
     public SpriteRenderer ChoosenTowerSprite { get => choosenTowerSprite; }
-
-    private Vector3Int mousePos;
-
-    private void Start()
+    private void Awake()
     {
         choosenTowerSprite = GetComponent<SpriteRenderer>();
         towerShop = GetComponentInParent<TowerShop>();
-        tilemap = GetComponent<Tilemap>();
-
+    }
+    private void FixedUpdate()
+    {
+        transform.position = _cursorHandler.GetCursorTransform().position;
     }
     private void Update()
     {
-        TowerFollowsCursor();
         if (clickedTowerButton != null)
         {
             if (Input.GetMouseButtonDown(0) && placeAvailable)
             {
-                PlaceTower();
+                PlaceTower(clickedTowerButton.TowerPrefab, transform.position, clickedTowerButton.Price, towers);
             }
             else if(Input.GetMouseButtonDown(1))
             {
@@ -41,35 +34,13 @@ public class TowerBuild : MonoBehaviour
             }
         }
     }
- 
-    private void TowerFollowsCursor()
-    {
-        if (clickedTowerButton != null)
-        {
-            transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0.5f, 0.5f) ;
-            float x = Mathf.RoundToInt(transform.position.x);
-            float y = Mathf.RoundToInt(transform.position.y);
-            transform.position = new Vector3(x, y, 0);
-        } 
-    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (clickedTowerButton != null)//uje ne nujen
+        if (clickedTowerButton != null)
         {
-            try
-            {
-                choosenTowerSprite.color = Color.red;
-                placeAvailable = false;
-            }
-            catch (Exception)
-            {
-                choosenTowerSprite.color = Color.red;
-                //collision.gameObject.GetComponent<TilemapRenderer>(). = Color.red;
-                placeAvailable = false;
-            }
-            
-            
+            choosenTowerSprite.color = Color.red;
+            placeAvailable = false;      
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
@@ -80,14 +51,13 @@ public class TowerBuild : MonoBehaviour
             placeAvailable = true;
         }
     }
-
-
-
-    private void PlaceTower()
+    public GameObject PlaceTower(GameObject towerPrefab, Vector3 position, int Price, Transform parentTransform )
     {
-        GameObject tower = Instantiate(clickedTowerButton.TowerPrefab, transform.position, Quaternion.identity);
-        towerShop.BuyTower(clickedTowerButton.Price);
-        tower.transform.SetParent(towers.transform);
+        //var placePosition = _cursorHandler.GetCursorTransform().position;
+        GameObject tower = Instantiate(towerPrefab, position, Quaternion.identity);
+        towerShop.BuyTower(Price);
+        tower.transform.SetParent(parentTransform);
+        return tower;
     }
 
     public void ChooseTower(TowerButton TowerButton)

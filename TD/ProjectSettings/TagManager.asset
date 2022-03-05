@@ -11,7 +11,7 @@ TagManager:
   - WindTower
   - Enemy
   - Projectile
-  - MyPlayer
+  - ElementalTower
   layers:
   - Default
   - TransparentFX
